@@ -5,14 +5,20 @@ import { GameProvider, useGame } from '@/game/GameContext';
 import { initialState } from '@/game/gameReducer';
 import { createLocalGameStore, loadSavedState, clearSavedState, type GameStore } from '@/game/store';
 import { SetupScreen } from '@/components/SetupScreen';
+import { GetReadyScreen } from '@/components/GetReadyScreen';
+import { PlayScreen } from '@/components/PlayScreen';
 
 function Screens() {
   const { state } = useGame();
   switch (state.phase) {
     case 'setup':
       return <SetupScreen />;
+    case 'get-ready':
+      return <GetReadyScreen />;
+    case 'playing':
+      return <PlayScreen />;
     default:
-      return <p className="p-8">phase: {state.phase}</p>; // replaced in Tasks 8 and 9
+      return <p className="p-8">phase: {state.phase}</p>; // replaced in Task 9
   }
 }
 
