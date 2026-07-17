@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Toaster } from '@/components/ui/sonner';
 import { GameProvider, useGame } from '@/game/GameContext';
 import { initialState } from '@/game/gameReducer';
-import { createLocalGameStore, loadSavedState, type GameStore } from '@/game/store';
+import { createLocalGameStore, loadSavedState, clearSavedState, type GameStore } from '@/game/store';
 import { SetupScreen } from '@/components/SetupScreen';
 
 function Screens() {
@@ -29,7 +29,13 @@ export default function App() {
         <p className="text-muted-foreground">Pick up where you left off?</p>
         <div className="flex gap-2">
           <Button onClick={() => setStore(createLocalGameStore(saved!))}>Resume game</Button>
-          <Button variant="outline" onClick={() => setStore(createLocalGameStore(initialState))}>
+          <Button
+            variant="outline"
+            onClick={() => {
+              clearSavedState();
+              setStore(createLocalGameStore(initialState));
+            }}
+          >
             Start fresh
           </Button>
         </div>

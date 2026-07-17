@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { STORAGE_KEY, createLocalGameStore, loadSavedState, type StorageLike } from './store';
+import { STORAGE_KEY, createLocalGameStore, loadSavedState, clearSavedState, type StorageLike } from './store';
 import { initialState } from './gameReducer';
 import { startedGame } from './testUtils';
 
@@ -68,6 +68,14 @@ describe('loadSavedState', () => {
     storage.setItem(STORAGE_KEY, 'not json{');
     expect(loadSavedState(storage)).toBeNull();
     storage.setItem(STORAGE_KEY, JSON.stringify({ version: 99, state: initialState }));
+    expect(loadSavedState(storage)).toBeNull();
+  });
+
+  it('clearSavedState removes the saved snapshot', () => {
+    const storage = fakeStorage();
+    const store = createLocalGameStore(startedGame(), storage);
+    store.dispatch({ type: 'START_TURN' });
+    clearSavedState(storage);
     expect(loadSavedState(storage)).toBeNull();
   });
 });

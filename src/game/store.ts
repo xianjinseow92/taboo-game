@@ -60,6 +60,14 @@ export function loadSavedState(storage: StorageLike | null = defaultStorage()): 
   }
 }
 
+export function clearSavedState(storage: StorageLike | null = defaultStorage()): void {
+  try {
+    storage?.removeItem(STORAGE_KEY);
+  } catch {
+    // storage unavailable, nothing to clear
+  }
+}
+
 // an interrupted turn restarts from get-ready, points already earned are kept
 function normalizeLoadedState(state: GameState): GameState {
   if (state.phase !== 'playing') return state;
