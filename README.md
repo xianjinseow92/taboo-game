@@ -1,32 +1,18 @@
-# React + TypeScript + Vite
+# Taboo
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A party companion for playing Taboo in person: card deck, turn timer, scoring, and scoreboard on one shared device.
 
-Currently, two official plugins are available:
+## Run
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+npm install
+npm run dev
 
-## React Compiler
+Open the printed URL. With `--host` (default in the dev script) any phone on the same Wi-Fi can open the network URL.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## How to play
 
-## Expanding the Oxlint configuration
++1 per correct guess, -1 when buzzed for a taboo word, skips are free. Configure teams, decks, timer, and game mode on the setup screen. Decks live in `src/decks/*.ts`, add cards by editing those files (each card needs exactly 5 taboo words, validated by `npm run test`).
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Tests
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+npm run test

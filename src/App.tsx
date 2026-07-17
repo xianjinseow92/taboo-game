@@ -7,6 +7,8 @@ import { createLocalGameStore, loadSavedState, clearSavedState, type GameStore }
 import { SetupScreen } from '@/components/SetupScreen';
 import { GetReadyScreen } from '@/components/GetReadyScreen';
 import { PlayScreen } from '@/components/PlayScreen';
+import { TurnRecapScreen } from '@/components/TurnRecapScreen';
+import { WinnerScreen } from '@/components/WinnerScreen';
 
 function Screens() {
   const { state } = useGame();
@@ -17,8 +19,10 @@ function Screens() {
       return <GetReadyScreen />;
     case 'playing':
       return <PlayScreen />;
-    default:
-      return <p className="p-8">phase: {state.phase}</p>; // replaced in Task 9
+    case 'turn-recap':
+      return <TurnRecapScreen />;
+    case 'winner':
+      return <WinnerScreen />;
   }
 }
 
