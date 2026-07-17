@@ -110,13 +110,14 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return { ...state, ...state.undoSnapshot, undoSnapshot: null };
     }
     case 'RESHUFFLE': {
+      if (state.phase !== 'playing') return state;
       const next = {
         ...state,
         drawPile: action.shuffled,
         usedCards: [],
         reshuffleCount: state.reshuffleCount + 1,
       };
-      return state.phase === 'playing' && !state.currentCard ? draw(next) : next;
+      return !state.currentCard ? draw(next) : next;
     }
     case 'TIME_UP': {
       if (state.phase !== 'playing') return state;

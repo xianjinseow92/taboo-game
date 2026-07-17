@@ -84,6 +84,12 @@ describe('deck edge cases', () => {
     expect(s.usedCards).toEqual([]);
     expect(s.reshuffleCount).toBe(1);
   });
+
+  it('RESHUFFLE is ignored outside the playing phase', () => {
+    const s = startedGame({}, 2, 2); // phase get-ready
+    const after = gameReducer(s, { type: 'RESHUFFLE', shuffled: s.drawPile });
+    expect(after).toBe(s);
+  });
 });
 
 describe('TIME_UP', () => {
