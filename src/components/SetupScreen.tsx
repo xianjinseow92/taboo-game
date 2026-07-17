@@ -36,7 +36,7 @@ export function SetupScreen() {
     dispatch({
       type: 'START_GAME',
       teams: names.map((name, i) => ({
-        id: crypto.randomUUID(),
+        id: crypto.randomUUID?.() ?? `team-${Date.now().toString(36)}-${i}`,
         name: name.trim(),
         color: TEAM_COLORS[i % TEAM_COLORS.length],
       })),
